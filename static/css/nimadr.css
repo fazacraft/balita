@@ -1,0 +1,96 @@
+/* General styling */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #4a90e2, #9013fe);
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+}
+
+.container {
+    text-align: center;
+}
+
+.error h1 {
+    font-size: 120px;
+    margin: 0;
+    font-weight: bold;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.error p {
+    font-size: 20px;
+    margin: 10px 0 20px;
+    animation: fadeIn 2.5s ease-in-out;
+}
+
+.home-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #9013fe;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    animation: fadeIn 3s ease-in-out;
+    transition: 0.3s ease;
+}
+
+.home-btn:hover {
+    background-color: #4a90e2;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Animation styling */
+.animation {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    background-color: #fff;
+    border-radius: 50%;
+    animation: bounce 1.5s infinite ease-in-out;
+}
+
+.circle:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.circle:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.circle:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+/* Keyframes for animation */
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,232 @@
+<!doctype html>
+{% load static %}
+{% load tags %}
+<html lang="en">
+
+<!-- Mirrored from preview.colorlib.com/theme/balita/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Nov 2024 12:34:06 GMT -->
+<head>
+    <title>Colorlib Balita &mdash; Minimal Blog Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,%20400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'fonts/ionicons/css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+
+    <!-- Theme Style -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+
+<header role="banner">
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-9 social">
+                    <a href="https://www.instagram.com/phazliddinphozilov/"><span class="fa fa-twitter"></span></a>
+                    <a href="https://www.instagram.com/phazliddinphozilov/"><span class="fa fa-facebook"></span></a>
+                    <a href="https://www.instagram.com/phazliddinphozilov/"><span class="fa fa-instagram"></span></a>
+                    <a href="https://youtu.be/d_JpOfYjQGM?si=wJYV2KsY7_Rznw2r"><span class="fa fa-youtube-play"></span></a>
+                    <a href="https://www.instagram.com/phazliddinphozilov/"><span class="fa fa-vimeo"></span></a>
+                    <a href="https://www.instagram.com/phazliddinphozilov/"><span class="fa fa-snapchat"></span></a>
+                </div>
+                <div class="col-3 search-top">
+                    <!-- <a href="#"><span class="fa fa-search"></span></a> -->
+                    <form action="/searchbek/" class="search-top-form" method="POST">
+                        {% csrf_token %}
+                        <span class="icon fa fa-search"></span>
+                        <input type="text" id="s" placeholder="Kalit so'z boyicha qidirish" name="query">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container logo-wrap">
+        <div class="row pt-5">
+            <div class="col-12 text-center">
+                <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button"
+                   aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
+                <h1 class="site-logo"><a href="/">Balita</a></h1>
+                <nav class="navbar navbar-expand-md  navbar-light bg-light">
+                    <div class="container">
+
+
+                        <div class="collapse navbar-collapse" id="navbarMenu">
+                            <ul class="navbar-nav mx-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link {% block home%} {% endblock %}" href="/">Home</a>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link {% block cat %}{% endblock %}dropdown-toggle" href="/category"
+                                       id="dropdown05"
+                                       data-toggle="dropdown"
+                                       aria-haspopup="true" aria-expanded="false">Categories</a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown05">
+                                        {% get_categories as categories %}
+                                        {% for cat in categories %}
+                                        {% if cat.post_counter >= 1 %}
+                                        <a class="dropdown-item" href="/category/{{ cat.id }}">{{ cat.name }}</a>
+                                        {% else %}
+                                         <a class="dropdown-item" href="/buyerda404">{{ cat.name }}</a>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {% block about %} {% endblock %}" href="/about">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {% block contact %} {% endblock %}" href="/contact">Contact</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+
+</header>
+<!-- END header -->
+
+
+<section class="site-section py-sm">
+    <div class="container">
+        <div class="row blog-entries">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</section>
+
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <h3>Paragraph</h3>
+                <p>
+                    <img src="{% static 'images/img_1.jpg' %}" alt="Image placeholder" class="img-fluid">
+                </p>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, accusantium optio unde perferendis
+                    eum illum voluptatibus dolore tempora, consequatur minus asperiores temporibus reprehenderit.</p>
+            </div>
+            <div class="col-md-6 ml-auto">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h3>Lastest Post</h3>
+                        <div class="post-entry-sidebar">
+                            <ul>
+                                <li>
+                                 {% get_lastest_posts as lastest_posts %}
+                                    {% for post in lastest_posts %}
+                                    <a href="#">
+                                        <img src="{{ post.image2.url }}" alt="Image placeholder" class="mr-4">
+                                        <div class="text">
+                                            <h4>{{ post.title }}</h4>
+                                            <div class="post-meta">
+                                                <span class="mr-2">{{ post.created_at }}</span> &bullet;
+                                                <span class="ml-2"><span class="fa fa-comments"></span> {{ post.comments_count }}</span>
+                                                <span class="ml-2"><span class="fa fa-eye"></span> {{ post.views_count }}</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    {% endfor %}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+
+                    <div class="col-md-4">
+
+                        <div class="mb-5">
+                            <h3>Quick Links</h3>
+                            <ul class="list-unstyled">
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Travel</a></li>
+                                <li><a href="#">Adventure</a></li>
+                                <li><a href="#">Courses</a></li>
+                                <li><a href="#">Categories</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-5">
+                            <h3>Social</h3>
+                            <ul class="list-unstyled footer-social">
+                                <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
+                                <li><a href="#"><span class="fa fa-facebook"></span> Facebook</a></li>
+                                <li><a href="#"><span class="fa fa-instagram"></span> Instagram</a></li>
+                                <li><a href="#"><span class="fa fa-vimeo"></span> Vimeo</a></li>
+                                <li><a href="#"><span class="fa fa-youtube-play"></span> Youtube</a></li>
+                                <li><a href="#"><span class="fa fa-snapchat"></span> Snapshot</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+                    href="https://colorlib.com/" target="_blank">Colorlib</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- END footer -->
+
+<!-- loader -->
+<div id="loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#f4b214"/>
+    </svg>
+</div>
+
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/jquery-migrate-3.0.0.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+
+
+<script src="{% static 'js/main.js' %}"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-23581568-13');
+</script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+        data-cf-beacon='{"rayId":"8e68f39a49668d92","version":"2024.10.5","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"cd0b4b3a733644fc843ef0b185f98241","b":1}'
+        crossorigin="anonymous"></script>
+</body>
+
+<!-- Mirrored from preview.colorlib.com/theme/balita/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Nov 2024 12:34:42 GMT -->
+</html>

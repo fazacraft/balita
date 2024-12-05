@@ -1,0 +1,157 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<section class="site-section py-lg">
+    <div class="container">
+
+        <div class="row blog-entries">
+            <div class="col-md-12 col-lg-8 main-content">
+                <h1 class="mb-4">{{ post.title }}</h1>
+                <div class="post-meta">
+                    <span class="category">{{ cat.name }}</span>
+                    <span class="mr-2">{{ post.created_at }}</span> &bullet;
+                    <span class="ml-2"><span class="fa fa-comments"></span> {{ post.comments_count }}</span>
+                    <span class="ml-2"><span class="fa fa-eye"></span> {{ views_counter }}</span>
+                </div>
+                <div class="post-content-body">
+                    <p>{{ post.text }}</p>
+                    </p>
+                    <div class="row mb-5">
+                        <div class="col-md-12 mb-4 element-animate">
+                            <img src="{{ post.image.url }}" alt="Image placeholder" class="img-fluid">
+                        </div>
+                        <div class="col-md-6 mb-4 element-animate">
+                            <img src="{{ post.image2.url }}" alt="Image placeholder" class="img-fluid">
+                        </div>
+                        <div class="col-md-6 mb-4 element-animate">
+                            <img src="{{ post.image3.url }}" alt="Image placeholder" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="pt-5">
+                    <p>Categories:
+
+                        <a href="/category/{{ cat.id }}">{{ post.category.name }}</a>
+                        Tags:
+                        {% for tag in tags %}
+                        <a href="/tag/{{ tag.id }}">#{{ tag.name }}</a>
+                        {% endfor %}
+                    </p>
+                </div>
+
+
+                <div class="pt-5">
+                    <h3 class="mb-5">{{ post.comments_count }} Comments</h3>
+                    <ul class="comment-list">
+                        {% for comment in comments %}
+                        <li class="comment">
+                            <div class="vcard">
+                                <img src="{% static 'images/person_1.jpg' %}" alt="Image placeholder">
+                            </div>
+                            <div class="comment-body">
+                                <h3>{{ comment.full_name }}</h3>
+                                <div class="meta">{{ comment.created_at }}</div>
+                                <p>{{ comment.text }}</p>
+                                <p><a href="#" class="reply">Reply</a></p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <!-- END comment-list -->
+
+                    <div class="comment-form-wrap pt-5">
+                        <h3 class="mb-5">Leave a comment</h3>
+                        <form action="#" method="POST" class="p-5 bg-light">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="name">Name *</label>
+                                <input type="text" class="form-control" id="name" name='full_name'>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="website">Website</label>
+                                <input type="url" class="form-control" id="website" name="website">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea name="text" id="message" cols="30" rows="10" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Post Comment" class="btn btn-primary">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- END main-content -->
+            {% include './layouts/nimadirbase.html' %}
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="mb-3 ">Related Post</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <a href="#" class="a-block d-flex align-items-center height-md"
+                   style="background-image: url('images/img_2.jpg'); ">
+                    <div class="text">
+                        <div class="post-meta">
+                            <span class="category">Lifestyle</span>
+                            <span class="mr-2">March 15, 2018 </span> &bullet;
+                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                        </div>
+                        <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <a href="#" class="a-block d-flex align-items-center height-md"
+                   style="background-image: url('images/img_3.jpg'); ">
+                    <div class="text">
+                        <div class="post-meta">
+                            <span class="category">Travel</span>
+                            <span class="mr-2">March 15, 2018 </span> &bullet;
+                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                        </div>
+                        <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <a href="#" class="a-block d-flex align-items-center height-md"
+                   style="background-image: url('images/img_4.jpg'); ">
+                    <div class="text">
+                        <div class="post-meta">
+                            <span class="category">Food</span>
+                            <span class="mr-2">March 15, 2018 </span> &bullet;
+                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                        </div>
+                        <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+<!-- END section -->
+{% endblock %}

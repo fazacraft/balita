@@ -1,0 +1,23 @@
+
+<div class="col-md-12">
+    {% for post in lastest_posts %}
+    <div class="post-entry-horzontal">
+        <a href="/blog/{{ post.id }}">
+            <div class="image element-animate" data-animate-effect="fadeIn"
+                 style="background-image: url({{ post.image2.url }});"></div>
+            <span class="text">
+                      <div class="post-meta">
+                        <span class="category">{{ post.category.name }}</span>
+                        <span class="mr-2">{{  post.created_at  }}</span> &bullet;
+                        <span class="ml-2"><span class="fa fa-comments"></span> {{ post.comments_count }}</span>
+
+                      </div>
+                      <h2>{{ post.title }}</h2>
+                                      <span class="ml-2"><span class="fa fa-eye"></span> {{ post.views_count }}</span>
+                    </span>
+
+        </a>
+    </div>
+    <!-- END post -->
+    {% endfor %}
+</div>
