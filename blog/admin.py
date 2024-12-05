@@ -6,7 +6,7 @@ from .models import Category, Comment, Post, Contact, Tag, Page_notfound
 
 admin.site.register(Category)
 admin.site.register(Comment)
-admin.site.register(Contact)
+
 admin.site.register(Page_notfound)
 
 
@@ -16,6 +16,10 @@ class PostAdmin(admin.ModelAdmin):
     list_display_links = ('title', 'category')
     list_filter = ('category', 'is_published', 'created_at')
 
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('id','name', 'email', 'is_solved')
+    list_display_links = ('name','id')
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
