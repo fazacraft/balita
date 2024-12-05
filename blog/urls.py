@@ -15,5 +15,6 @@ urlpatterns = [
     path('buyerda404/', blog_error_view),
     path('searchbek/', search_view),
     path('www/', search_view),
-    21312
+    21312,
+    21
 ]
