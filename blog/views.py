@@ -1,5 +1,6 @@
 import re
 import requests
+from django.conf import settings
 from django.db.models import Q, Max, F
 from django.shortcuts import render, redirect
 from faker import Faker
@@ -73,9 +74,7 @@ def about_view(request):
 
 
 def contact_view(request):
-    TELEGRAM_BOT_TOKEN = "8062810091:AAH9T1c64eNnr0vLiSVJJpPppd0oOi6e_FI"
-    BASE_URL = "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}"
-    CHAT_ID = '-1001660431368'
+
     cats = Category.objects.all()
 
     if request.method == 'POST':
@@ -87,8 +86,8 @@ def contact_view(request):
         print(data)
         obj = Contact.objects.create(email=email, name=name, phone=phone, message=message)
         obj.save()
-        response = requests.get(BASE_URL.format(TELEGRAM_BOT_TOKEN, CHAT_ID,
-                                                f'Project: Balita\nType:ContactUs\nId:{obj.id}\nMessage:{obj.message}\nEmail:{obj.email}\nPhone:{obj.phone}'))
+        response = requests.get(settings.BASE_URL.format(settings.TELEGRAM_BOT_TOKEN, settings.CHAT_ID,
+                                f'Project: Balita\nType:ContactUs\nId:{obj.id}\nMessage:{obj.message}\nEmail:{obj.email}\nPhone:{obj.phone}'))
         print(response.json())
         return redirect('/contact')
     d = {
