@@ -71,6 +71,8 @@ class Contact(models.Model):
     email = models.EmailField()
     message = models.TextField()
 
+    is_solved = models.BooleanField(default=False)
+
     def __str__(self):
         return self.name
 
